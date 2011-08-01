@@ -1,0 +1,1 @@
+grep -E -n -r --include=\*.php --exclude=.svn "function ${TM_SELECTED_TEXT:-$TM_CURRENT_WORD}\w+\s*\(" ${TM_PROJECT_DIRECTORY:-$TM_DIRECTORY}

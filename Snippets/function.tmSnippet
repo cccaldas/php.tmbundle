@@ -2,18 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>bundlePath</key>
+	<string>/Users/kumar/Library/Application Support/TextMate/Bundles/PHPDoc.tmbundle</string>
 	<key>content</key>
-	<string>${1:public/private/protected} function ${2:FunctionName}(${3:\$${4:value}${5:=''}})
-{
-	${0:# code...}
+	<string>function $1($2) {
+	$0
 }</string>
 	<key>name</key>
-	<string>function …</string>
+	<string>function</string>
 	<key>scope</key>
 	<string>source.php</string>
 	<key>tabTrigger</key>
-	<string>fun</string>
+	<string>fn</string>
 	<key>uuid</key>
-	<string>EC96DA26-8CCF-11D9-B507-000D93C8BE28</string>
+	<string>E9475FE0-2F66-4270-B26C-223E32DD0209</string>
 </dict>
 </plist>

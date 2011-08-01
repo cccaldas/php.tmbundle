@@ -24,6 +24,7 @@ class FooBar
         $bar = 123,
         array $arr = array(1, 2),
         Something_Else $blah = null
+
     ) {
         // parent::test3($foo3, $bar, $arr, $blah);
     }    
