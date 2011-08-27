@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>&lt;?${TM_PHP_OPEN_TAG:php} $0 ?&gt;</string>
+	<string>&lt;?php $1 ?&gt;</string>
 	<key>name</key>
 	<string>&lt;?php … ?&gt;</string>
 	<key>scope</key>
-	<string>text.html</string>
+	<string>text.html, source.php</string>
 	<key>tabTrigger</key>
 	<string>php</string>
 	<key>uuid</key>

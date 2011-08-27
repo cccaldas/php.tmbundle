@@ -3,16 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>foreach (\$${1:variable} as \$${2:key}${3: =&gt; \$${4:value}}) {
-	${0:# code...}
+	<string>public function ${1:functionName}(${2:params}) {
+	$3
 }</string>
 	<key>name</key>
-	<string>foreach</string>
+	<string>public function</string>
 	<key>scope</key>
 	<string>source.php</string>
 	<key>tabTrigger</key>
-	<string>for</string>
+	<string>public</string>
 	<key>uuid</key>
-	<string>C0229432-8CCE-11D9-B507-000D93C8BE28</string>
+	<string>A39D9264-3E30-459D-BBD8-46D38F8CBE9D</string>
 </dict>
 </plist>

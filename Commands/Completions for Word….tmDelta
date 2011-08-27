@@ -5,7 +5,8 @@
 	<key>changed</key>
 	<dict>
 		<key>command</key>
-		<string>complete.rb</string>
+		<string>#complete.py
+complete.rb</string>
 		<key>keyEquivalent</key>
 		<string>^ </string>
 	</dict>
