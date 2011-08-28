@@ -1,15 +1,36 @@
 #!/usr/bin/env ruby
 
 # -wKU
-
-
 require ENV['TM_SUPPORT_PATH'] + '/lib/osx/plist'
 require ENV['TM_SUPPORT_PATH'] + '/lib/ui'
 
 begin
   choices = []
   
-  env_current_word = ENV["TM_CURRENT_WORD"]
+  env_current_word  = ENV["TM_CURRENT_WORD"]
+  env_file_path     = ENV["TM_FILEPATH"]
+  
+  #print env_current_word + "\n"
+  
+  def get_class_by_object(object, file)
+    object = object.sub(" ", "")
+    object = object.sub("\n", "")
+    object = object.sub("\t", "")
+    #print "search " + object + ", " + file + "\n"
+    result = search_in_file(object + " = ", file)
+    #print "search: " + object  + " =, result: " + result + "\n" 
+    result = result.split("=")[1]
+    result = result.sub("new", "").strip
+    result = result.sub("\n", "")
+    result = result.sub("\t", "")
+    result = result.sub(" ", "")
+    result = result.split("(")[0]
+    #print "get_class_by_object: " + result + "\n" 
+    #print "get_class_by_object, object: " + object + ", file: " + file + "\n"
+    #print "get_class_by_object, object: " + object + ", result: " + result + "\n"
+    
+    return result
+  end
   
   def search(word)
     project_path = ENV["TM_PROJECT_DIRECTORY"]
@@ -39,6 +60,25 @@ begin
       classes.push(item)
     }
     return classes
+  end
+  
+  def get_file_by_class(_class)
+    result = search("class " + _class)
+    result = result.split(":")[0]
+    return result
+  end
+  
+  def get_public_functions_by_class(_class)
+    file = get_file_by_class(_class)
+    result = search_in_file("public function", file)
+    functions = []
+    result.each {
+      |function|
+      function = function.split(":")[1]
+      functions.push(parse_method_to_choice(function))
+    }
+    
+    return functions
   end
   
   def get_static_methods(_class, word)
@@ -103,29 +143,30 @@ begin
     
     return choice
   end
-  
-  #classes
-  
-  
-  #print env_current_word + "\n"
-  #print ENV["TM_CURRENT_LINE"]
-  #print ENV["TM_SCOPE"]
-  #print ENV["TM_COLUMN_NUMBER"] + "\n"
-  #print ENV["TM_CURRENT_WORD"] + "\n"
-  #print ENV["TM_CURRENT_LINE"] + "\n"
-  
-  
+
   #statics
   if env_current_word.index("::") != nil
-    print "statics \n"
+    #print "statics \n"
     methods = get_static_methods(env_current_word.split("::")[0], env_current_word.split("::")[1])
     methods.each {
       |method|
       #print method
       choices += OSX::PropertyList.load(method)
     }
-  #elsif
-   else
+    
+  #public functions
+  elsif env_current_word.index("->") != nil
+    #print "public functions, " + env_current_word + ", Class: " + get_class_by_object(env_current_word.split("->")[0] + "\n", env_file_path) + "\n"
+    #print get_class_by_object(env_current_word.split("->")[0] + "\n", env_file_path)
+    functions = get_public_functions_by_class( get_class_by_object(env_current_word.split("->")[0] + "\n", env_file_path) )
+    functions.each {
+      |function|
+      #print function + "\n"
+      choices += OSX::PropertyList.load(function)
+    }
+    #print "public functions" +  "\n"
+    
+  else
      
      #general
      choices += OSX::PropertyList.load(File.read(ENV['TM_BUNDLE_SUPPORT'] + '/functions.plist'))
@@ -140,30 +181,11 @@ begin
       }
   end
   
-  
-  
-  
-  #result = %x( echo 'hi' )
-  #result = %x( grep -E -n -r --include=\*.php --exclude=.svn --exclude=.git "function i\w+\s*\(" . )
-  #
-  #result.sub("(","")
-  #result = %x( ls )
-  #result = %x( grep -E -n -r --include=\*.php --exclude=.svn --exclude=.git "public function" . )
-  #dom = ‘www.gotripod.com‘
-  #@whois = %x[whois #\{dom\}]
-  
-  #result = result.sub("public function","")
-  #result = result.sub("{","")
-  #result = result.sub("}","")
-  #puts result
-  
-  #choices += OSX::PropertyList.load("({display = 'concatenatetest'; insert = '';},)")
-  
-  
-  
-  #print get_classes("adas")
-  
   if env_current_word.index("::") != nil
+    env_current_word = ""
+  end
+  
+  if env_current_word.index("->") != nil
     env_current_word = ""
   end
   
