@@ -1,0 +1,7 @@
+#	autocompletion for public functions
++	autocompletion for public vars
+#	autocompletion for ClassName
+#	autocompletion for public static functions
++	fix the spaces removed from method parameters
++	remove the last whitespace from method parameters
++	on autocompletion, insert the file.php for functions with same name

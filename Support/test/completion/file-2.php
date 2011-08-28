@@ -1,5 +1,9 @@
 <?php
 
+	public function function1($param1, $param2) {
+		
+	}
+
 	public function function3($param1, $param2) {
 		
 	}

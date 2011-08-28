@@ -8,7 +8,7 @@
 		
 	}
 	
-	public function function2($param1, $param2) {
+	public function function2($param1, $param2="test") {
 		
 	}
 	
