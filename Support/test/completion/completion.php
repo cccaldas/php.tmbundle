@@ -7,5 +7,7 @@
 	
 	$product = new Model_Entity_Product();
 	
+	Model_DAO_Clients::
+	
 	
 ?>

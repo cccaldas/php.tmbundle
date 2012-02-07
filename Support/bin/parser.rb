@@ -28,8 +28,8 @@ class Parser
     return result = %x( grep -Rni --include=\*.php --exclude=.svn --exclude=.git "#{pattern}" "#{path}" ).split("\n")
   end
   
-  def self.find_static_variables(path, keyword)
-    variables = []
+  def self.find_constants(path, keyword)
+    constants = []
     #pattern = "define\((.*)\,";
     pattern = "define.*(.*" + keyword;
     result = Parser.find(path, pattern)
@@ -47,10 +47,10 @@ class Parser
       item = item.sub("\"", "")
       item = item.sub("'", "")
       
-      variables.push(item)
+      constants.push(item)
     }
     
-    return variables
+    return constants
   end
   
   def self.get_file_by_class(path, klass)
@@ -58,6 +58,13 @@ class Parser
     file = Parser.find(path, pattern)[0]
     file = file.split(":")[0]
     return file;
+  end
+  
+  def self.parse_function_parameters_to_insert(params)
+    #"${" + i.to_s() + ":" + param + "}"
+    params = params.gsub(%r{\(|\)}, "")
+    puts params
+    return params
   end
   
   def self.get_static_functions(path, klass)
@@ -77,7 +84,8 @@ class Parser
   end
   
   def self.parse_choice(display, insert)
-    return "({display = '" + display + "'; insert = '" + insert + "';})"
+    return "({display = '" + display + "'; insert = '" + insert + "';},)"
+    #return "({display = '" + display + "'; insert = '(" + insert + ")';},)"
     
     #choice = "({display = '" + display + "'; insert = '(" + insert + ")';},)"
   end

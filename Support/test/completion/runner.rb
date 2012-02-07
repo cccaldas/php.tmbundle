@@ -23,18 +23,18 @@ begin
     puts ""
   end
   
-  def run_static_variables
-    puts "run_static_variables"
+  def run_constants
+    puts "run_constants"
     puts ""
     
     puts "search for: DAO_STATIC_"
-    variables = Parser.find_static_variables("./classes/", "DAO_STATIC_")
-    puts variables
+    constants = Parser.find_constants("./classes/", "DAO_STATIC_")
+    puts constants
     puts ""
     
     puts "search for: PRODUCT"
-    variables = Parser.find_static_variables("./classes/", "PRODUCT")
-    puts variables
+    constants = Parser.find_constants("./classes/", "PRODUCT")
+    puts constants
     puts ""
   end
   
@@ -50,7 +50,7 @@ begin
   
   #run
   #run_classes
-  #run_static_variables
-  run_static_functions
+  run_constants
+  #run_static_functions
     
 end
