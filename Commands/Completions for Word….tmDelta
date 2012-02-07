@@ -5,10 +5,11 @@
 	<key>changed</key>
 	<dict>
 		<key>command</key>
-		<string>#complete.py
-complete.rb</string>
+		<string>complete.rb</string>
 		<key>keyEquivalent</key>
 		<string>^ </string>
+		<key>name</key>
+		<string>Autocomplete</string>
 	</dict>
 	<key>deleted</key>
 	<array/>

@@ -13,7 +13,7 @@ print "/* " + os.environ['TM_SELECTED_TEXT'] + " */"</string>
 	<key>input</key>
 	<string>document</string>
 	<key>keyEquivalent</key>
-	<string>@C</string>
+	<string>@/</string>
 	<key>name</key>
 	<string>Comment Block</string>
 	<key>output</key>
